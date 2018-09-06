@@ -29,6 +29,9 @@ class App extends Component {
                authToken: response.data.token
             });
             this.artistSearch('Drake');
+         })
+         .catch((error) => {
+            console.log(error);
          });
    }
 
@@ -46,6 +49,9 @@ class App extends Component {
                selectedArtist: artist
             });
             this.getRelatedArtists(artist.id);
+         })
+         .catch((error) => {
+            console.log(error);
          });
    }
 
@@ -76,9 +82,9 @@ class App extends Component {
       if (this.state.selectedArtist) {
          listTitle =
             <div>
-               <h4>
+               <h2>
                   Related artists for {this.state.selectedArtist.name}
-               </h4>
+               </h2>
             </div>;
       } else {
          listTitle = null;
@@ -87,9 +93,7 @@ class App extends Component {
       return (
          <div>
             <SearchBar onSearchTermSubmit={this.artistSearch.bind(this)} />
-            <h1>
-               {listTitle}
-            </h1>
+            {listTitle}
             <ArtistList
                onArtistSelect={this.onArtistSelect.bind(this)}
                authToken={this.state.authToken}

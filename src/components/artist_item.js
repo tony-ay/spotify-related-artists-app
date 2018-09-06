@@ -12,7 +12,7 @@ class ArtistItem extends Component {
       }
    }
 
-   componentWillMount() {
+   componentDidMount() {
       this.getTopSong();
    }
 
@@ -29,15 +29,26 @@ class ArtistItem extends Component {
             "Authorization": `Bearer ${this.props.authToken}`
          }})
          .then((response) => {
-            const songId = response.data.tracks[0].id;
-            const url = `https://open.spotify.com/embed/track/${songId}`
+            let songId;
+            let url;
+            if (response.data.tracks[0]) {
+               songId = response.data.tracks[0].id;
+               url = `https://open.spotify.com/embed/track/${songId}`;
+            } else {
+               url = null;
+            }
             this.setState({
                songUrl: url
-            });
+            })
+         })
+         .catch((error) => {
+            console.log(error);
          });
    }
 
    render() {
+      const artist = this.props.artist;
+
       let songPreview;
       if (this.state.songUrl) {
          songPreview = <div className="embed-responsive embed-responsive-21by9">
@@ -47,19 +58,25 @@ class ArtistItem extends Component {
          songPreview = null;
       }
 
-      const artist = this.props.artist;
+      let artistImage;
+      if (artist.images[0]) {
+         artistImage = <div className="media-left">
+            <img className="media-object" src={artist.images[0].url} />
+         </div>
+      } else {
+         artistImage = null;
+      }
 
       return (
          <li onClick={() => this.props.onArtistSelect(artist)} className="list-group-item">
             <div className="artist-item media">
-               <div className="media-left">
-                  <img className="media-object" src={artist.images[0].url} />
-               </div>
+               {artistImage}
                <div className="media-body">
-                  {artist.name}
+                  <h4>{artist.name}</h4>
                   <div>
-                     {songPreview}
+                     Genres: {artist.genres.map((genre) => {return `${genre}, `;})}
                   </div>
+                  <div>{songPreview}</div>
                </div>
             </div>
          </li>
