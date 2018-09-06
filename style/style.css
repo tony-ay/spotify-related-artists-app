@@ -4,18 +4,16 @@
 }
 
 .search-bar input {
-   width: 75%
+   width: 75%;
+}
+
+.artist-list {
+   margin: auto;
+   width: 80%
 }
 
 .artist-item img {
    max-width: 128px;
-}
-
-.artist-details  {
-   margin-top: 10px;
-   padding: 10px;
-   border: 1px solid #ddd;
-   border-radius: 4px;
 }
 
 .list-group-item {
@@ -24,4 +22,8 @@
 
 .list-group-item:hover {
    background-color: #eee;
+}
+
+.center-text {
+   text-align: center;
 }

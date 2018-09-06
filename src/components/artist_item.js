@@ -51,7 +51,7 @@ class ArtistItem extends Component {
 
       let songPreview;
       if (this.state.songUrl) {
-         songPreview = <div className="embed-responsive embed-responsive-21by9">
+         songPreview = <div className="embed-responsive embed-responsive-16by9">
                <iframe className="embed-responsive-item" src={this.state.songUrl}></iframe>
             </div>
       } else {
@@ -60,9 +60,7 @@ class ArtistItem extends Component {
 
       let artistImage;
       if (artist.images[0]) {
-         artistImage = <div className="media-left">
-            <img className="media-object" src={artist.images[0].url} />
-         </div>
+         artistImage = <img className="media-object" src={artist.images[0].url} />
       } else {
          artistImage = null;
       }
@@ -70,14 +68,12 @@ class ArtistItem extends Component {
       return (
          <li onClick={() => this.props.onArtistSelect(artist)} className="list-group-item">
             <div className="artist-item media">
-               {artistImage}
-               <div className="media-body">
+               <div className="media-left">
                   <h4>{artist.name}</h4>
-                  <div>
-                     Genres: {artist.genres.map((genre) => {return `${genre}, `;})}
-                  </div>
-                  <div>{songPreview}</div>
+                  {artistImage}
+                  <div><b>Genres:</b><br/>{artist.genres.join(', ')}</div>
                </div>
+               <div className="media-body">{songPreview}</div>
             </div>
          </li>
       );

@@ -81,7 +81,7 @@ class App extends Component {
       let listTitle;
       if (this.state.selectedArtist) {
          listTitle =
-            <div>
+            <div className="center-text">
                <h2>
                   Related artists for {this.state.selectedArtist.name}
                </h2>
@@ -93,11 +93,13 @@ class App extends Component {
       return (
          <div>
             <SearchBar onSearchTermSubmit={this.artistSearch.bind(this)} />
-            {listTitle}
-            <ArtistList
-               onArtistSelect={this.onArtistSelect.bind(this)}
-               authToken={this.state.authToken}
-               artists={this.state.relatedArtists} />
+            <div className="artist-list">
+               {listTitle}
+               <ArtistList
+                  onArtistSelect={this.onArtistSelect.bind(this)}
+                  authToken={this.state.authToken}
+                  artists={this.state.relatedArtists} />
+            </div>
          </div>
       );
    }

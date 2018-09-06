@@ -12,8 +12,9 @@ class SearchBar extends Component {
          <div className="search-bar">
             <input
                value={this.state.term}
-               onChange={event => this.onInputChange(event.target.value)} />
-            <button onClick={event => this.onInputSubmit(this.state.term)} >
+               onChange={event => this.onInputChange(event.target.value)}
+               placeholder="Search for an artist" />
+            <button onClick={event => this.onInputSubmit(this.state.term)}>
                Search
             </button>
          </div>
